@@ -1,0 +1,68 @@
+Node 1    T1   R(X)                                             C?
+          T2          R(E)
+	  T3                                     W(E)
+---------------------------------------------------------------------------------------------
+Node 2    T1          R(Y)            W(Y)                      C?
+		  T2                R(F) W(F) 
+		  T3   R(G)                          W(G)
+---------------------------------------------------------------------------------------------
+Node 3    T1                R(Z)                  W(Z)          C?
+		  T2                          R(H)W(H)
+		  T3          R(H)
+		  
+		  
+1) Is there a deadlock in this schedule?
+2) Can T1 commit?
+
+
+Graph T1 T2 T3
+
+Node1:
+	T3 -> T2
+	
+	
+Node2:
+
+
+Node3: 	
+	T2 -> T3
+	
+	
+Merge nodes:
+	T3 -> T2
+	T2 -> T3   so there is deadlock in system; To solve remove T2 from system
+	
+T1 is not dependend on T2 or T3 so it can commit.
+
+-------------------------------------
+
+Node 1 : X, E
+Node 2 : Y, F, G
+Node 3 : Z, H
+
+
+Design locking system:
+	Node 1 :  X -> T1; E -> T2
+	Node 2 :  G -> T3; Y -> T1; F -> T2
+	Node 3 :  H -> T3; Z -> T1; 
+	
+	T2 -> H  (H wait for T2)
+	
+	
+	E -> T2 -> H -> T3 -> E ; remove E and H  => T2 -> T3 -> T2
+
+
+Exercise 2; centralized commit
+
+1. Nr of messages in each protocol. 3n for Centralized 2P and 2n for Linea 2PC
+2. 3t ptr Centralized and 2nt ptr Linear
+3. Failure? Does not matter for Centralized. 
+
+
+	
+	
+	
+	
+	
+	
+	
